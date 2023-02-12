@@ -14,4 +14,8 @@ use App\Http\Controllers\ContactsController;
 |
 */
 
-Route::get('/', [ContactsController::class, 'index']);
+Route::group(['prefix' => '/', 'as' => 'contacts.'], function () {
+    Route::get('/', [ContactsController::class, 'index'])->name('index');
+    Route::get('/add-contact', [ContactsController::class, 'addContact'])->name('add-contact');
+    Route::post('/store', [ContactsController::class, 'store'])->name('store');
+});
